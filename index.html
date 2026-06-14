@@ -1,0 +1,2470 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>業務改善・DXポートフォリオ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: oklch(22% 0.02 210);
+      --muted: oklch(46% 0.025 215);
+      --paper: oklch(98.5% 0.004 95);
+      --surface: oklch(100% 0 0);
+      --line: oklch(86% 0.015 215);
+      --steel: oklch(44% 0.05 220);
+      --accent: oklch(55% 0.12 195);
+      --green: oklch(58% 0.11 155);
+      --amber: oklch(72% 0.12 75);
+      --red: oklch(58% 0.14 25);
+      --violet: oklch(53% 0.11 308);
+      --case01: oklch(52% 0.10 215);
+      --case02: oklch(55% 0.09 160);
+      --case03: oklch(65% 0.10 75);
+      --case04: oklch(55% 0.11 25);
+
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 12px;
+      --space-lg: 16px;
+      --space-xl: 24px;
+      --space-2xl: 32px;
+      --space-3xl: 48px;
+      --space-4xl: 64px;
+      --space-5xl: 96px;
+      --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.04), 0 1px 3px oklch(0% 0 0 / 0.06);
+      --shadow-md: 0 4px 12px oklch(0% 0 0 / 0.05), 0 2px 4px oklch(0% 0 0 / 0.03);
+      --shadow-lg: 0 12px 24px oklch(0% 0 0 / 0.06), 0 4px 8px oklch(0% 0 0 / 0.03);
+      color-scheme: light;
+      font-family: "Zen Kaku Gothic New", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 15px;
+      scroll-behavior: smooth;
+      line-break: normal;
+      overflow-wrap: break-word;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--paper);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    button, input, select, a { font: inherit; }
+
+    .container {
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+    }
+
+    .portfolio-shell {
+      width: min(1520px, 96vw);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr) 300px;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .portfolio-main {
+      min-width: 0;
+    }
+
+    .portfolio-main .container {
+      width: 100%;
+    }
+
+    .portfolio-rail,
+    .portfolio-side {
+      position: sticky;
+      top: 82px;
+      display: grid;
+      gap: var(--space-md);
+      padding-block: var(--space-xl);
+    }
+
+    .rail-card,
+    .side-card {
+      display: grid;
+      gap: var(--space-sm);
+      padding: var(--space-lg);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: color-mix(in oklch, var(--surface), var(--paper) 22%);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .rail-card h2,
+    .side-card h2 {
+      font-size: 0.9rem;
+    }
+
+    .rail-nav {
+      display: grid;
+      gap: 2px;
+    }
+
+    .rail-nav a,
+    .side-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 34px;
+      padding: 7px 9px;
+      border-radius: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .rail-nav a:hover,
+    .side-link:hover {
+      background: color-mix(in oklch, var(--accent), transparent 92%);
+      color: var(--ink);
+    }
+
+    .rail-nav span {
+      color: var(--steel);
+      font-size: 0.68rem;
+      font-weight: 800;
+    }
+
+    .rail-nav a.rail-sub {
+      min-height: 30px;
+      padding-left: var(--space-xl);
+      font-size: 0.74rem;
+      color: color-mix(in oklch, var(--muted), var(--ink) 12%);
+    }
+
+    .side-mini-list {
+      display: grid;
+      gap: var(--space-sm);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .side-mini-list li {
+      display: grid;
+      gap: 2px;
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px solid color-mix(in oklch, var(--line), transparent 45%);
+    }
+
+    .side-mini-list li:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .side-mini-list strong {
+      font-size: 0.8rem;
+    }
+
+    .side-mini-list span {
+      color: var(--muted);
+      font-size: 0.74rem;
+      line-height: 1.55;
+    }
+
+    .skill-section {
+      padding-block: var(--space-4xl);
+      border-top: 1px solid var(--line);
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .skill-item {
+      display: grid;
+      gap: var(--space-sm);
+      padding: var(--space-xl);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .skill-item strong {
+      font-family: "M PLUS 1", sans-serif;
+      font-size: 1.02rem;
+    }
+
+    .skill-item span {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.88rem;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: color-mix(in oklch, var(--paper), transparent 10%);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .site-header .container {
+      width: min(1520px, 96vw);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-block: var(--space-md);
+      gap: var(--space-lg);
+    }
+
+    .site-brand {
+      display: grid;
+      gap: 2px;
+    }
+
+    .site-brand .eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--steel);
+      text-transform: uppercase;
+    }
+
+    .site-brand strong {
+      font-family: "M PLUS 1", sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .site-nav {
+      display: flex;
+      gap: var(--space-xs);
+      flex-wrap: wrap;
+    }
+
+    .site-nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition: all 150ms ease;
+    }
+
+    .site-nav a:hover {
+      background: color-mix(in oklch, var(--accent), transparent 92%);
+      color: var(--ink);
+    }
+
+    h1, h2, h3 { margin: 0; letter-spacing: 0; }
+
+    h1 {
+      font-family: "M PLUS 1", sans-serif;
+      font-size: clamp(2.6rem, 6.5vw, 4.5rem);
+      line-height: 1.15;
+      font-weight: 800;
+    }
+
+    h2 {
+      font-family: "M PLUS 1", sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+      line-height: 1.3;
+      font-weight: 800;
+    }
+
+    h3 {
+      font-family: "M PLUS 1", sans-serif;
+      font-size: 1.15rem;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.85;
+      color: var(--muted);
+    }
+
+    .section-head {
+      display: grid;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xl);
+    }
+
+    .section-head .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--steel);
+      text-transform: uppercase;
+    }
+
+    .hero {
+      padding-block: var(--space-5xl);
+    }
+
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .areas-section {
+      padding-block: var(--space-4xl);
+      border-top: 1px solid var(--line);
+    }
+
+    .areas-section .system-map {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: var(--space-xl);
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(1.8rem, 6vw, 4.5rem);
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .hero-copy p {
+      max-width: 38em;
+      font-size: 1.1rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--surface);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: all 150ms ease;
+      border: 1px solid var(--ink);
+    }
+
+    .btn:hover {
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .btn.ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .system-map {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+      padding: var(--space-lg);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: var(--shadow-md);
+    }
+
+    .map-node {
+      min-height: 80px;
+      padding: var(--space-md);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: color-mix(in oklch, var(--paper), var(--accent) 2%);
+      display: grid;
+      gap: var(--space-xs);
+      align-content: center;
+    }
+
+    .map-node strong {
+      font-family: "M PLUS 1", sans-serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .map-node span {
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .profile-section {
+      padding-block: var(--space-4xl);
+      border-top: 1px solid var(--line);
+    }
+
+    .profile-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 0.35fr);
+      gap: var(--space-2xl);
+      padding: var(--space-2xl);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .profile-body {
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    .profile-body p {
+      font-size: 1rem;
+      max-width: 42em;
+    }
+
+    .profile-meta {
+      display: grid;
+      gap: var(--space-md);
+      align-content: start;
+    }
+
+    .profile-photo-placeholder {
+      aspect-ratio: 1 / 1;
+      border: 2px dashed var(--line);
+      border-radius: 50%;
+      background: color-mix(in oklch, var(--paper), var(--accent) 3%);
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .name-card {
+      padding: var(--space-xl);
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--accent);
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+
+    .name-card-name {
+      font-family: "M PLUS 1", sans-serif;
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    .name-card-role {
+      margin-top: var(--space-sm);
+      font-size: 0.78rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .name-card-email {
+      display: inline-block;
+      margin-top: var(--space-md);
+      font-size: 0.78rem;
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .name-card-email:hover {
+      text-decoration: underline;
+    }
+
+    .profile-stat {
+      padding: var(--space-md);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: color-mix(in oklch, var(--paper), var(--accent) 2%);
+    }
+
+    .profile-stat strong {
+      display: block;
+      font-family: "M PLUS 1", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .profile-stat span {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .cases-section {
+      padding-block: var(--space-4xl);
+      border-top: 1px solid var(--line);
+    }
+
+    .case {
+      display: grid;
+      gap: var(--space-2xl);
+      padding-bottom: var(--space-4xl);
+      margin-bottom: var(--space-4xl);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .case:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    #case01 { --case-color: var(--case01); }
+    #case02 { --case-color: var(--case02); }
+    #case03 { --case-color: var(--case03); }
+    #case04 { --case-color: var(--case04); }
+
+
+
+
+    .case-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-lg);
+      align-items: end;
+    }
+
+    .case-title {
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .case-title p {
+      max-width: 52em;
+    }
+
+    .case-title .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--steel);
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .case-no {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--case-color);
+      color: var(--surface);
+      font-family: "M PLUS 1", sans-serif;
+      font-weight: 800;
+      font-size: 0.82rem;
+      line-height: 1;
+    }
+
+    .case-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+
+    .case-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: color-mix(in oklch, var(--case-color), transparent 90%);
+      color: color-mix(in oklch, var(--case-color), var(--ink) 35%);
+      border: 1px solid color-mix(in oklch, var(--case-color), transparent 75%);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .case .panel { border-top: 3px solid var(--case-color); }
+    .case .metric strong { color: var(--case-color); }
+    .case .tool:hover { border-color: var(--case-color); color: var(--case-color); }
+
+    .toolbar {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .tool {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--ink);
+      padding: 8px 14px;
+      cursor: pointer;
+      min-height: 38px;
+      font-weight: 500;
+      transition: all 150ms ease;
+    }
+
+    .tool:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .tool[aria-pressed="true"] {
+      background: var(--ink);
+      color: var(--surface);
+      border-color: var(--ink);
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .effect-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .effect-card {
+      padding: var(--space-lg);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+
+    .effect-label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: var(--space-sm);
+    }
+
+    .effect-values {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      font-family: "M PLUS 1", sans-serif;
+      font-weight: 800;
+    }
+
+    .effect-before {
+      color: var(--muted);
+      text-decoration: line-through;
+      font-size: 0.9rem;
+    }
+
+    .effect-after {
+      color: var(--case-color);
+      font-size: 1.2rem;
+    }
+
+    .effect-arrow {
+      color: var(--steel);
+    }
+
+    .metric {
+      padding: var(--space-lg);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .metric strong {
+      font-family: "M PLUS 1", sans-serif;
+      font-size: 1.55rem;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .metric p {
+      font-size: 0.8rem;
+    }
+
+    .panel-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.8fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .panel, .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .panel {
+      display: grid;
+      overflow: hidden;
+    }
+
+    .panel-head {
+      padding: var(--space-lg) var(--space-lg) var(--space-md);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-md);
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel-body {
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    .table-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th, td {
+      padding: 14px 12px;
+      border-bottom: 1px solid color-mix(in oklch, var(--line), transparent 40%);
+      text-align: left;
+      vertical-align: middle;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    th {
+      color: var(--steel);
+      background: color-mix(in oklch, var(--paper), var(--accent) 3%);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    tr:hover td {
+      background: color-mix(in oklch, var(--accent), transparent 96%);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 74px;
+      min-height: 28px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .ok { color: color-mix(in oklch, var(--green), var(--ink) 20%); background: color-mix(in oklch, var(--green), transparent 90%); border-color: color-mix(in oklch, var(--green), transparent 60%); }
+    .warn { color: color-mix(in oklch, var(--amber), var(--ink) 35%); background: color-mix(in oklch, var(--amber), transparent 86%); border-color: color-mix(in oklch, var(--amber), transparent 50%); }
+    .bad { color: color-mix(in oklch, var(--red), var(--ink) 15%); background: color-mix(in oklch, var(--red), transparent 90%); border-color: color-mix(in oklch, var(--red), transparent 60%); }
+    .info { color: color-mix(in oklch, var(--accent), var(--ink) 18%); background: color-mix(in oklch, var(--accent), transparent 92%); border-color: color-mix(in oklch, var(--accent), transparent 62%); }
+    .muted { color: var(--muted); background: color-mix(in oklch, var(--line), transparent 76%); }
+
+    .flow { display: grid; gap: var(--space-md); }
+    .flow-step {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr) auto;
+      gap: var(--space-md);
+      align-items: center;
+      padding: var(--space-md);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: color-mix(in oklch, var(--surface), var(--paper) 40%);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step-no {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      background: var(--ink);
+      color: var(--surface);
+      font-weight: 800;
+      font-size: 0.78rem;
+      font-family: "M PLUS 1", sans-serif;
+    }
+
+    .chart {
+      min-height: 260px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: var(--space-lg);
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: var(--space-md);
+      align-items: center;
+      margin-bottom: var(--space-md);
+      font-size: 0.84rem;
+    }
+
+    .bar-track {
+      height: 28px;
+      border-radius: 4px;
+      background: color-mix(in oklch, var(--line), transparent 60%);
+      overflow: hidden;
+    }
+
+    .bar { height: 100%; border-radius: 4px; background: var(--accent); }
+
+    .scatter {
+      height: 340px;
+      position: relative;
+      display: block;
+    }
+
+    .scatter svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .regression-line {
+      fill: none;
+      stroke: var(--case-color);
+      stroke-width: 3;
+      stroke-linecap: round;
+      filter: drop-shadow(0 6px 10px oklch(0% 0 0 / 0.12));
+    }
+
+    .axis-label {
+      position: absolute;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .axis-label.x { right: 8px; bottom: 4px; }
+    .axis-label.y { left: 8px; top: 4px; }
+
+    .dot {
+      position: absolute;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      transform: translate(-50%, 50%);
+      border: 2px solid var(--surface);
+      box-shadow: 0 2px 10px oklch(0% 0 0 / 0.12);
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .legend span { display: inline-flex; gap: var(--space-xs); align-items: center; }
+
+    .swatch { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+    .warehouse {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(72px, 1fr));
+      gap: var(--space-sm);
+    }
+
+    .slot {
+      min-height: 86px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: var(--space-sm);
+      background: color-mix(in oklch, var(--surface), var(--paper) 24%);
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      align-content: space-between;
+      gap: var(--space-xs);
+      font-size: 0.78rem;
+    }
+
+    .slot strong { font-size: 0.92rem; font-weight: 700; }
+    .slot.is-hold { background: color-mix(in oklch, var(--amber), var(--surface) 84%); }
+    .slot.is-ng { background: color-mix(in oklch, var(--red), var(--surface) 90%); }
+
+    .wizard { display: grid; gap: var(--space-md); }
+    .wizard-step {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: var(--space-md);
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: var(--space-md);
+      align-items: center;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .small-list { display: grid; gap: var(--space-sm); }
+    .small-item {
+      display: grid;
+      gap: var(--space-xs);
+      padding: var(--space-md);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: color-mix(in oklch, var(--surface), var(--paper) 32%);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .small-item span { color: var(--muted); font-size: 0.82rem; line-height: 1.55; }
+
+    .print-note {
+      padding: var(--space-lg);
+      border: 1px dashed color-mix(in oklch, var(--steel), transparent 35%);
+      border-radius: 12px;
+      color: var(--muted);
+      background: color-mix(in oklch, var(--surface), var(--amber) 5%);
+      line-height: 1.7;
+    }
+
+    .check-progress {
+      display: grid;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+
+    .progress-ring {
+      display: grid;
+      place-items: center;
+      position: relative;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: conic-gradient(var(--case-color) calc(var(--pct) * 1%), color-mix(in oklch, var(--line), transparent 40%) 0);
+    }
+
+    .progress-ring::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border-radius: 50%;
+      background: var(--surface);
+    }
+
+    .progress-ring strong {
+      position: relative;
+      font-family: "M PLUS 1", sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--case-color);
+      line-height: 1;
+    }
+
+    .progress-ring strong span {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .progress-ring > span {
+      position: relative;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .progress-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+
+    .progress-meta .small-item {
+      flex: 1 1 160px;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: var(--space-md);
+      padding-left: 24px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: color-mix(in oklch, var(--case-color), transparent 70%);
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr) auto;
+      gap: var(--space-md);
+      align-items: center;
+      padding: var(--space-md);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -21px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--case-color);
+      border: 2px solid var(--surface);
+      box-shadow: 0 0 0 2px color-mix(in oklch, var(--case-color), transparent 70%);
+    }
+
+    .timeline-item time {
+      font-family: "M PLUS 1", sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--steel);
+    }
+
+    .timeline-item.done { opacity: 0.7; }
+
+    .diagram {
+      padding: var(--space-lg);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+    }
+
+    .flow-diagram {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+    }
+
+    .flow-box {
+      padding: var(--space-md) var(--space-lg);
+      border-radius: 12px;
+      background: color-mix(in oklch, var(--case-color), transparent 90%);
+      border: 1px solid color-mix(in oklch, var(--case-color), transparent 70%);
+      color: color-mix(in oklch, var(--case-color), var(--ink) 25%);
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-align: center;
+      min-width: 100px;
+    }
+
+    .flow-box.small {
+      padding: var(--space-sm) var(--space-md);
+      min-width: 72px;
+      font-size: 0.82rem;
+    }
+
+    .flow-arrow {
+      color: var(--steel);
+      font-weight: 800;
+      font-size: 1.2rem;
+      font-family: "M PLUS 1", sans-serif;
+    }
+
+    .rack-3d {
+      perspective: 900px;
+      display: grid;
+      gap: var(--space-md);
+    }
+
+    .rack-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+
+    .shelf {
+      min-height: 92px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: var(--space-sm);
+      background: color-mix(in oklch, var(--surface), var(--paper) 30%);
+      box-shadow: 4px 4px 0 color-mix(in oklch, var(--ink), transparent 90%);
+      display: grid;
+      align-content: space-between;
+      gap: var(--space-xs);
+      font-size: 0.76rem;
+    }
+
+    .shelf strong { font-size: 0.9rem; font-weight: 700; }
+    .shelf.is-hold { background: color-mix(in oklch, var(--amber), var(--surface) 84%); }
+    .shelf.is-ng { background: color-mix(in oklch, var(--red), var(--surface) 90%); }
+
+    .modal-backdrop {
+      --case-color: var(--case03);
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: var(--space-xl);
+      background: oklch(20% 0.03 220 / 0.56);
+      z-index: 50;
+    }
+
+    .modal-backdrop.open {
+      display: grid;
+    }
+
+    .modal {
+      width: min(1120px, 100%);
+      max-height: min(760px, 92vh);
+      overflow: auto;
+      border-radius: 18px;
+      background: var(--surface);
+      border: 1px solid color-mix(in oklch, var(--line), transparent 20%);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-lg);
+      padding: var(--space-lg) var(--space-xl);
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in oklch, var(--surface), transparent 3%);
+    }
+
+    .modal-body {
+      padding: var(--space-xl);
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    .warehouse-three-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: var(--space-lg);
+      min-height: 560px;
+    }
+
+    .warehouse-three-canvas {
+      position: relative;
+      min-height: 560px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+
+    .warehouse-three-canvas canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .warehouse-three-canvas.is-hovering canvas {
+      cursor: pointer;
+    }
+
+    .warehouse-three-guide {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      z-index: 2;
+      display: grid;
+      gap: 3px;
+      max-width: 300px;
+      padding: 10px 12px;
+      border: 1px solid color-mix(in oklch, var(--line), transparent 20%);
+      border-radius: 10px;
+      background: oklch(99% 0.006 96 / 0.9);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      pointer-events: none;
+    }
+
+    .warehouse-three-toolbar {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      z-index: 3;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      pointer-events: none;
+    }
+
+    .warehouse-three-toolbar button {
+      min-height: 34px;
+      padding: 0 10px;
+      border: 1px solid color-mix(in oklch, var(--line), transparent 10%);
+      border-radius: 8px;
+      background: oklch(99% 0.006 96 / 0.94);
+      color: var(--ink);
+      font-size: 0.74rem;
+      font-weight: 800;
+      cursor: pointer;
+      pointer-events: auto;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .warehouse-three-toolbar button:hover,
+    .warehouse-three-toolbar button:focus {
+      border-color: color-mix(in oklch, var(--case-color), transparent 20%);
+      color: color-mix(in oklch, var(--case-color), var(--ink) 20%);
+      outline: none;
+    }
+
+    .warehouse-three-side {
+      display: grid;
+      gap: var(--space-md);
+      align-content: start;
+    }
+
+    .three-badge {
+      display: grid;
+      gap: var(--space-xs);
+      padding: var(--space-md);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .three-badge span {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+
+    .gantt {
+      display: grid;
+      gap: var(--space-sm);
+      overflow-x: auto;
+      padding-bottom: var(--space-xs);
+    }
+
+    .gantt-grid {
+      min-width: 900px;
+      display: grid;
+      grid-template-columns: 220px repeat(20, 42px);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .gantt-cell,
+    .gantt-head,
+    .gantt-label {
+      min-height: 42px;
+      border-bottom: 1px solid color-mix(in oklch, var(--line), transparent 40%);
+      border-right: 1px solid color-mix(in oklch, var(--line), transparent 50%);
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-sm);
+      font-size: 0.78rem;
+    }
+
+    .gantt-head {
+      justify-content: center;
+      font-weight: 800;
+      color: var(--steel);
+      background: color-mix(in oklch, var(--paper), var(--case-color) 4%);
+    }
+
+    .gantt-label {
+      font-weight: 700;
+      background: var(--surface);
+    }
+
+    .gantt-track {
+      position: relative;
+      grid-column: 2 / -1;
+      min-height: 42px;
+      border-bottom: 1px solid color-mix(in oklch, var(--line), transparent 40%);
+      background: repeating-linear-gradient(90deg, transparent 0 41px, color-mix(in oklch, var(--line), transparent 50%) 41px 42px);
+    }
+
+    .gantt-bar {
+      position: absolute;
+      top: 9px;
+      height: 24px;
+      border-radius: 999px;
+      background: var(--case-color);
+      color: var(--surface);
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-sm);
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .gantt-bar.warn { background: var(--amber); color: var(--ink); }
+    .gantt-bar.bad { background: var(--red); }
+    .gantt-bar.done { background: var(--green); }
+
+    .cycle-diagram {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-lg);
+      position: relative;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    .cycle-diagram::before {
+      content: "";
+      position: absolute;
+      inset: 20px;
+      border: 2px dashed color-mix(in oklch, var(--case-color), transparent 60%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .cycle-item {
+      position: relative;
+      z-index: 1;
+      padding: var(--space-md);
+      border-radius: 12px;
+      background: color-mix(in oklch, var(--case-color), transparent 90%);
+      border: 1px solid color-mix(in oklch, var(--case-color), transparent 70%);
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.86rem;
+    }
+
+    .phone-mockup {
+      width: min(260px, 100%);
+      margin: 0 auto;
+      border: 10px solid var(--ink);
+      border-radius: 28px;
+      padding: 12px 8px 16px;
+      background: var(--ink);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .phone-screen {
+      background: var(--surface);
+      border-radius: 18px;
+      padding: var(--space-md);
+      min-height: 360px;
+      display: grid;
+      gap: var(--space-md);
+    }
+
+    .phone-notch {
+      width: 48px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--ink);
+      margin: 0 auto 4px;
+    }
+
+    .contact-section {
+      padding-block: var(--space-4xl);
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .contact-section p {
+      max-width: 40em;
+      margin: 0 auto var(--space-lg);
+    }
+
+    .site-footer {
+      padding-block: var(--space-xl);
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .site-footer p {
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 960px) {
+      .portfolio-shell {
+        width: min(1120px, 92vw);
+        grid-template-columns: 1fr;
+      }
+      .portfolio-rail,
+      .portfolio-side {
+        position: static;
+        padding-block: 0;
+      }
+      .portfolio-rail {
+        padding-top: var(--space-xl);
+      }
+      .rail-nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .system-map { grid-template-columns: repeat(2, 1fr); }
+      .areas-section .system-map { grid-template-columns: repeat(2, 1fr); }
+      .profile-card { grid-template-columns: 1fr; }
+      .panel-grid { grid-template-columns: 1fr; }
+      .case-header { grid-template-columns: 1fr; }
+      .toolbar { justify-content: flex-start; }
+    }
+
+    @media (max-width: 720px) {
+      .site-header .container { flex-wrap: wrap; }
+      .site-nav { width: 100%; justify-content: flex-start; }
+      .rail-nav { grid-template-columns: 1fr; }
+      .skill-grid { grid-template-columns: 1fr; }
+      .hero { padding-block: var(--space-3xl); }
+      .system-map { grid-template-columns: repeat(2, 1fr); }
+      .metric-row { grid-template-columns: 1fr; }
+      .effect-row { grid-template-columns: 1fr; }
+      .warehouse { grid-template-columns: repeat(2, 1fr); }
+      .warehouse-three-shell { grid-template-columns: 1fr; }
+      .warehouse-three-canvas { min-height: 420px; }
+      .modal-backdrop { padding: var(--space-md); }
+      .panel-head, .flow-step, .wizard-step { grid-template-columns: 1fr; }
+      .hero-cta { flex-direction: column; }
+      .btn { justify-content: center; }
+    }
+
+    @media print {
+      body { background: var(--surface); }
+      .site-header, .hero-cta, .contact-section, .site-footer, .portfolio-rail, .portfolio-side { display: none; }
+      .portfolio-shell { display: block; width: auto; }
+      .container { width: auto; padding: 0; }
+      .case { break-after: page; margin-bottom: 32px; border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="site-brand">
+        <span class="eyebrow">Portfolio</span>
+        <strong>DX Portfolio</strong>
+      </div>
+      <nav class="site-nav" aria-label="ページ内ナビ">
+        <a href="#about">ABOUT</a>
+        <a href="#skill">SKILL</a>
+        <a href="#works">WORKS</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-copy">
+        <h1>業務改善からDX化まで</h1>
+        <p>JIS品質管理者 × 業務改善 × 生成AI。kintoneを中心に、Webアプリやスマホアプリも組み合わせて、現場が使いやすい業務システムを作ります。</p>
+        <div class="hero-cta">
+          <a href="#about" class="btn">自己紹介を見る</a>
+          <a href="#works" class="btn ghost">制作実績を見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="areas-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">AREAS</div>
+        <h2>対応領域</h2>
+      </div>
+      <div class="system-map" aria-label="システム構成図">
+        <div class="map-node"><strong>Schedule</strong><span>生産予定 / ガント / 在庫導線</span></div>
+        <div class="map-node"><strong>Inventory</strong><span>在庫管理 / 出荷可否 / 不適合</span></div>
+        <div class="map-node"><strong>Quality</strong><span>品質集約 / 最終合否 / 朝会</span></div>
+        <div class="map-node"><strong>Claims</strong><span>クレーム / 是正 / 水平展開</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="portfolio-shell">
+    <aside class="portfolio-rail" aria-label="ポートフォリオメニュー">
+      <section class="rail-card">
+        <h2>メニュー</h2>
+        <nav class="rail-nav">
+          <a href="#about">自己紹介 <span>ABOUT</span></a>
+          <a href="#skill">スキル <span>SKILL</span></a>
+          <a href="#works">制作実績 <span>WORKS</span></a>
+          <a href="#case01" class="rail-sub">連携基盤 <span>01</span></a>
+          <a href="#case02" class="rail-sub">品質分析 <span>02</span></a>
+          <a href="#case03" class="rail-sub">在庫管理 <span>03</span></a>
+          <a href="#case04" class="rail-sub">クレーム管理 <span>04</span></a>
+          <a href="#contact">お問い合わせ方法 <span>CONTACT</span></a>
+        </nav>
+      </section>
+    </aside>
+
+    <main class="portfolio-main">
+
+  <section id="about" class="profile-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">ABOUT</div>
+        <h2>JIS品質管理者として、業務改善からDX化を支援</h2>
+      </div>
+      <div class="profile-card">
+        <div class="profile-body">
+          <p><strong>JIS品質管理者の資格を持ち、品質管理の考え方を軸に業務改善からDX化まで支援する開発者です。</strong></p>
+          <p>JIS Q 9001（ISO 9001）に基づく品質管理では、受入検査・工程内検査・出荷検査といった検査フロー、ロットのトレーサビリティ、不適合品の管理、是正処置のPDCAなどを明文化したプロセスとして運用します。これらのフローが紙やExcelのままだと、入力漏れや承認の遅れ、履歴の散在といった課題が起きやすいため、まずは現場の業務を整理し、最適なデジタル化の形を一緒に考えます。</p>
+          <p>ツールはあくまで手段の一つです。kintoneをはじめ、Webアプリ、スマホアプリ、生成AIなど、現場の運用状況や既存システムに合わせて選択し、検査結果の自動判定、出荷可否の条件分岐、クレーム対応の水平展開管理、在庫ロットの状態追跡など、品質管理に必要な「見える化」を実現します。</p>
+          <p>現場の業務をそのままシステム化するのではなく、JISの視点でフローを整理し、必要な記録と承認の流れをデザインしてからDX化に進むため、監査対応も含めた運用がしやすくなります。</p>
+          <p>加えて、生成AIを活用した要件整理、画面設計、コード生成、テスト観点の抽出まで、スピーディーに進められます。</p>
+        </div>
+        <div class="profile-meta">
+          <div class="profile-photo-placeholder" aria-label="プロフィール写真の配置場所">
+            <span>写真</span>
+          </div>
+          <div class="name-card">
+            <div class="name-card-name">Mitsuhiro</div>
+            <div class="name-card-role">JIS品質管理者 / 業務改善・DX支援</div>
+            <a class="name-card-email" href="mailto:kisanagi247@gmail.com">kisanagi247@gmail.com</a>
+          </div>
+          <div class="profile-stat"><strong>40+</strong><span>業務アプリ</span></div>
+          <div class="profile-stat"><strong>9,000</strong><span>行規模のカスタマイズ</span></div>
+          <div class="profile-stat"><strong>Web/スマホ</strong><span>生成AI活用</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skill" class="skill-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">SKILL</div>
+        <h2>業務理解と実装をつなぐスキル</h2>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-item"><strong>kintoneアプリ設計</strong><span>業務フロー、入力項目、一覧、権限、通知、承認まで、現場運用に合わせて設計します。</span></div>
+        <div class="skill-item"><strong>JavaScript / CSSカスタマイズ</strong><span>標準機能だけでは難しい入力補助、判定、集計、画面改善を実装します。</span></div>
+        <div class="skill-item"><strong>品質管理・製造業務理解</strong><span>検査、ロット、出荷可否、不適合、是正処置など、品質管理の流れを踏まえて整理します。</span></div>
+        <div class="skill-item"><strong>生成AIを使ったDX支援</strong><span>要件整理、画面モック、Webアプリ試作、資料作成をスピーディーに進めます。</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="works" class="cases-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">WORKS</div>
+        <h2>業務改善・DX事例</h2>
+      </div>
+      <article id="case01" class="case"></article>
+      <article id="case02" class="case"></article>
+      <article id="case03" class="case"></article>
+      <article id="case04" class="case"></article>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">CONTACT</div>
+        <h2>まずは気軽に相談してください</h2>
+      </div>
+      <p>現在の業務運用や、「ちょっと面倒だな」と感じているフローを教えてください。</p>
+      <p>ヒアリングから設計、開発、テスト、運用開始まで一緒に進めます。</p>
+      <a href="mailto:kisanagi247@gmail.com" class="btn">メールで相談する</a>
+    </div>
+  </section>
+    </main>
+
+    <aside class="portfolio-side" aria-label="依頼前の確認ポイント">
+      <section class="side-card">
+        <h2>対応できること</h2>
+        <ul class="side-mini-list">
+          <li><strong>kintoneアプリ開発</strong><span>設計、フィールド構成、一覧、権限、運用導線の整理</span></li>
+          <li><strong>JavaScript/CSSカスタマイズ</strong><span>入力補助、判定、集計、画面UI改善</span></li>
+          <li><strong>品質・製造業務のDX</strong><span>ロット、検査、出荷、是正処置の見える化</span></li>
+          <li><strong>生成AI活用</strong><span>業務改善、資料作成、Webアプリ試作</span></li>
+        </ul>
+      </section>
+      <section class="side-card">
+        <h2>相談時にあると早い情報</h2>
+        <ul class="side-mini-list">
+          <li><strong>現在の帳票</strong><span>Excel、紙、既存kintone画面</span></li>
+          <li><strong>困っている流れ</strong><span>入力漏れ、二重入力、確認待ち、属人化</span></li>
+          <li><strong>理想の状態</strong><span>一覧化、通知、自動判定、スマホ対応など</span></li>
+        </ul>
+        <a href="#contact" class="side-link">相談セクションへ <span>→</span></a>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 DX Portfolio. 実在の会社名・顧客名・品番・ロット・検査値は含みません。</p>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="warehouseModal" role="dialog" aria-modal="true" aria-labelledby="warehouseModalTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <div class="eyebrow">Inventory 3D Map</div>
+          <h2 id="warehouseModalTitle">3D在庫マップ</h2>
+        </div>
+        <button class="btn secondary" type="button" data-close-modal>閉じる</button>
+      </div>
+      <div class="modal-body" id="warehouseModalBody"></div>
+    </div>
+  </div>
+
+  <script src="./demo/warehouse-3d/three.min.js"></script>
+  <script>
+
+    const production = [
+      { id: "1001", date: "2026-06-01", line: "A", product: "製品A", lot: "260601A01", planned: 120, actual: 118, location: "L01-03", stock: "在庫中", inspection: "検査完了", judgment: "合格", indexA: 2.1, indexB: 88, shipping: "出荷可", next: "通常出荷" },
+      { id: "1002", date: "2026-06-01", line: "A", product: "製品A", lot: "260601A02", planned: 120, actual: 121, location: "L01-04", stock: "在庫中", inspection: "検査中", judgment: "保留", indexA: 2.8, indexB: 82, shipping: "出荷保留", next: "再確認" },
+      { id: "1003", date: "2026-06-02", line: "B", product: "製品B", lot: "260602B01", planned: 96, actual: 96, location: "L02-08", stock: "在庫中", inspection: "検査完了", judgment: "合格", indexA: 1.9, indexB: 91, shipping: "出荷可", next: "通常出荷" },
+      { id: "1004", date: "2026-06-02", line: "B", product: "製品B", lot: "260602B02", planned: 96, actual: 94, location: "L02-09", stock: "不適合隔離", inspection: "検査完了", judgment: "不合格", indexA: 3.6, indexB: 76, shipping: "出荷不可", next: "不適合品移動" },
+      { id: "1005", date: "2026-06-03", line: "C", product: "製品C", lot: "260603C01", planned: 80, actual: 80, location: "L03-11", stock: "在庫中", inspection: "検査完了", judgment: "合格", indexA: 2.0, indexB: 86, shipping: "出荷可", next: "証明書作成" },
+      { id: "1006", date: "2026-06-03", line: "C", product: "製品C", lot: "260603C02", planned: 80, actual: 79, location: "L03-12", stock: "在庫中", inspection: "検査完了", judgment: "条件付合格", indexA: 2.4, indexB: 84, shipping: "条件付出荷", next: "品質保証確認" },
+      { id: "1007", date: "2026-06-04", line: "A", product: "製品A", lot: "260604A01", planned: 120, actual: 120, location: "L02-12", stock: "在庫中", inspection: "検査完了", judgment: "合格", indexA: 2.2, indexB: 89, shipping: "出荷可", next: "通常出荷" },
+      { id: "1008", date: "2026-06-04", line: "B", product: "製品D", lot: "260604B01", planned: 60, actual: 58, location: "L03-15", stock: "在庫中", inspection: "未検査", judgment: "未判定", indexA: null, indexB: null, shipping: "出荷保留", next: "検査待ち" }
+    ];
+
+    const thermal = [
+      { id: "2001", date: "2026-05-01", type: "通常品", category: "製品群I", metricA: 0.034, metricB: 0.92, metricC: 2.5, result: "合格", group: "製品群I 標準" },
+      { id: "2002", date: "2026-05-02", type: "通常品", category: "製品群I", metricA: 0.035, metricB: 0.68, metricC: 2.6, result: "合格", group: "製品群I 標準" },
+      { id: "2003", date: "2026-05-03", type: "通常品", category: "製品群I", metricA: 0.036, metricB: 1.08, metricC: 2.8, result: "合格", group: "製品群I 標準" },
+      { id: "2004", date: "2026-05-04", type: "通常品", category: "製品群I", metricA: 0.037, metricB: 0.96, metricC: 3.0, result: "合格", group: "製品群I 標準" },
+      { id: "2005", date: "2026-05-05", type: "通常品", category: "製品群I", metricA: 0.038, metricB: 1.34, metricC: 3.1, result: "合格", group: "製品群I 標準" },
+      { id: "2006", date: "2026-05-06", type: "通常品", category: "製品群I", metricA: 0.039, metricB: 1.18, metricC: 3.3, result: "合格", group: "製品群I 標準" },
+      { id: "2007", date: "2026-05-07", type: "実験品", category: "製品群I", metricA: 0.040, metricB: 1.72, metricC: 3.5, result: "要確認", group: "製品群I 実験" },
+      { id: "2008", date: "2026-05-08", type: "実験品", category: "製品群I", metricA: 0.041, metricB: 1.46, metricC: 3.8, result: "要確認", group: "製品群I 実験" },
+      { id: "2009", date: "2026-05-09", type: "通常品", category: "製品群II", metricA: 0.033, metricB: 0.74, metricC: 2.4, result: "合格", group: "製品群II 標準" },
+      { id: "2010", date: "2026-05-10", type: "通常品", category: "製品群II", metricA: 0.034, metricB: 0.55, metricC: 2.6, result: "合格", group: "製品群II 標準" },
+      { id: "2011", date: "2026-05-11", type: "通常品", category: "製品群II", metricA: 0.035, metricB: 1.02, metricC: 2.7, result: "合格", group: "製品群II 標準" },
+      { id: "2012", date: "2026-05-12", type: "通常品", category: "製品群II", metricA: 0.036, metricB: 0.86, metricC: 2.9, result: "合格", group: "製品群II 標準" },
+      { id: "2013", date: "2026-05-13", type: "通常品", category: "製品群II", metricA: 0.037, metricB: 1.28, metricC: 3.0, result: "合格", group: "製品群II 標準" },
+      { id: "2014", date: "2026-05-14", type: "実験品", category: "製品群II", metricA: 0.038, metricB: 1.03, metricC: 3.2, result: "合格", group: "製品群II 実験" },
+      { id: "2015", date: "2026-05-15", type: "実験品", category: "製品群II", metricA: 0.039, metricB: 1.64, metricC: 3.4, result: "要確認", group: "製品群II 実験" },
+      { id: "2016", date: "2026-05-16", type: "通常品", category: "製品群III", metricA: 0.038, metricB: 1.58, metricC: 3.2, result: "合格", group: "製品群III 標準" },
+      { id: "2017", date: "2026-05-17", type: "通常品", category: "製品群III", metricA: 0.039, metricB: 1.33, metricC: 3.4, result: "合格", group: "製品群III 標準" },
+      { id: "2018", date: "2026-05-18", type: "通常品", category: "製品群III", metricA: 0.040, metricB: 1.82, metricC: 3.5, result: "合格", group: "製品群III 標準" },
+      { id: "2019", date: "2026-05-19", type: "通常品", category: "製品群III", metricA: 0.041, metricB: 1.61, metricC: 3.8, result: "要確認", group: "製品群III 標準" },
+      { id: "2020", date: "2026-05-20", type: "通常品", category: "製品群III", metricA: 0.042, metricB: 2.28, metricC: 3.9, result: "要確認", group: "製品群III 標準" },
+      { id: "2021", date: "2026-05-21", type: "実験品", category: "製品群III", metricA: 0.043, metricB: 1.96, metricC: 4.1, result: "要確認", group: "製品群III 実験" },
+      { id: "2022", date: "2026-05-22", type: "通常品", category: "製品群III", metricA: 0.044, metricB: 2.62, metricC: 4.2, result: "不合格", group: "製品群III 標準" },
+      { id: "2023", date: "2026-05-23", type: "実験品", category: "製品群III", metricA: 0.045, metricB: 2.34, metricC: 4.5, result: "不合格", group: "製品群III 実験" },
+      { id: "2024", date: "2026-05-24", type: "実験品", category: "製品群III", metricA: 0.046, metricB: 3.05, metricC: 4.9, result: "不合格", group: "製品群III 実験" }
+    ];
+
+    const warehouse = [
+      { location: "A-03", area: "A", product: "製品A", lot: "260601A01", qty: 28, position: 4, level: 3, status: "出荷待ち", stamp: "正常", judgment: "出荷可" },
+      { location: "A-04", area: "A", product: "製品A", lot: "260601A02", qty: 30, position: 6, level: 4, status: "出荷待ち", stamp: "保留", judgment: "出荷保留" },
+      { location: "A-08", area: "A", product: "製品B", lot: "260602B01", qty: 24, position: 9, level: 2, status: "出荷待ち", stamp: "正常", judgment: "出荷可" },
+      { location: "A-12", area: "A", product: "製品D", lot: "260604B01", qty: 14, position: 12, level: 1, status: "一部出荷済", stamp: "未検査", judgment: "出荷保留" },
+      { location: "B-03", area: "B", product: "製品B", lot: "260602B02", qty: 18, position: 5, level: 2, status: "積替済", stamp: "不適合", judgment: "出荷不可" },
+      { location: "B-08", area: "B", product: "製品C", lot: "260603C01", qty: 20, position: 7, level: 3, status: "出荷待ち", stamp: "正常", judgment: "出荷可" },
+      { location: "B-10", area: "B", product: "製品C", lot: "260603C02", qty: 19, position: 10, level: 4, status: "一部出荷済", stamp: "条件付", judgment: "条件付出荷" },
+      { location: "B-14", area: "B", product: "資材", lot: "MAT-260604", qty: 16, position: 2, level: 2, status: "資材", stamp: "正常", judgment: "出荷対象外" }
+    ];
+
+    const claims = [
+      { id: "CLM-0001", date: "2026-05-10", customer: "顧客A", product: "製品A", type: "サイズ", step: "是正処置", status: "対応中", m4: "Method", action: "検査手順の再教育", due: "2026-06-20" },
+      { id: "CLM-0002", date: "2026-05-12", customer: "顧客B", product: "製品B", type: "外観", step: "有効性確認", status: "確認待ち", m4: "Machine", action: "設備点検頻度の見直し", due: "2026-06-18" },
+      { id: "CLM-0003", date: "2026-05-15", customer: "顧客C", product: "製品C", type: "数量", step: "完了判断", status: "完了", m4: "Man", action: "出荷前チェックリスト改訂", due: "2026-06-05" },
+      { id: "CLM-0004", date: "2026-05-18", customer: "顧客D", product: "製品D", type: "問い合わせ", step: "受付情報", status: "対象外", m4: "Material", action: "是正不要", due: "2026-06-10" },
+      { id: "CLM-0005", date: "2026-05-21", customer: "顧客E", product: "製品A", type: "包装", step: "判定・是正計画", status: "対応中", m4: "Environment", action: "保管場所表示の改善", due: "2026-06-25" },
+      { id: "CLM-0006", date: "2026-05-25", customer: "顧客F", product: "製品B", type: "書類", step: "一次処理・調査", status: "調査中", m4: "Method", action: "帳票確認フロー追加", due: "2026-06-28" }
+    ];
+
+
+
+
+
+
+
+    function statusClass(value) {
+      if (["合格", "出荷可", "完了", "有効", "同期済", "正常"].includes(value)) return "ok";
+      if (["保留", "条件付合格", "条件付出荷", "検査中", "確認待ち", "対応中", "要確認", "調査中"].includes(value)) return "warn";
+      if (["不合格", "出荷不可", "不適合", "期限超過"].includes(value)) return "bad";
+      if (["未判定", "未検査", "未着手", "対象外"].includes(value)) return "muted";
+      return "info";
+    }
+
+    function chip(value) {
+      return `<span class="status ${statusClass(value)}">${value}</span>`;
+    }
+
+    function table(headers, rows) {
+      return `
+        <div class="table-wrap">
+          <table>
+            <thead><tr>${headers.map((h) => `<th>${h}</th>`).join("")}</tr></thead>
+            <tbody>${rows.join("")}</tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function metric(label, value, note = "") {
+      return `<div class="metric"><span>${label}</span><strong>${value}</strong><p>${note}</p></div>`;
+    }
+
+    function caseHeader(no, title, copy, tags = []) {
+      const tagHtml = tags.map((t) => `<span class="case-tag">${t}</span>`).join("");
+      return `
+        <header class="case-header">
+          <div class="case-title">
+            <div class="eyebrow"><span class="case-no">${no}</span>Portfolio Case ${no}</div>
+            <h2>${title}</h2>
+            <p>${copy}</p>
+            <div class="case-tags">${tagHtml}</div>
+          </div>
+          <div class="toolbar">
+            <button class="tool" type="button" aria-pressed="true">一覧</button>
+            <button class="tool" type="button" aria-pressed="false">業務フロー</button>
+            <button class="tool" type="button" aria-pressed="false">公開用</button>
+          </div>
+        </header>
+      `;
+    }
+
+    function effectCard(before, after, label) {
+      return `
+        <div class="effect-card">
+          <span class="effect-label">${label}</span>
+          <div class="effect-values">
+            <span class="effect-before">${before}</span>
+            <span class="effect-arrow">→</span>
+            <span class="effect-after">${after}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function solve3x3(matrix, values) {
+      const m = matrix.map((row, i) => [...row, values[i]]);
+      for (let i = 0; i < 3; i++) {
+        let pivot = i;
+        for (let r = i + 1; r < 3; r++) {
+          if (Math.abs(m[r][i]) > Math.abs(m[pivot][i])) pivot = r;
+        }
+        [m[i], m[pivot]] = [m[pivot], m[i]];
+        const divisor = m[i][i] || 1;
+        for (let c = i; c < 4; c++) m[i][c] /= divisor;
+        for (let r = 0; r < 3; r++) {
+          if (r === i) continue;
+          const factor = m[r][i];
+          for (let c = i; c < 4; c++) m[r][c] -= factor * m[i][c];
+        }
+      }
+      return [m[0][3], m[1][3], m[2][3]];
+    }
+
+    function regressionPath(data, xMin, xMax, yMin, yMax) {
+      const n = data.length;
+      const sx = data.reduce((sum, r) => sum + r.metricA, 0);
+      const sx2 = data.reduce((sum, r) => sum + r.metricA ** 2, 0);
+      const sx3 = data.reduce((sum, r) => sum + r.metricA ** 3, 0);
+      const sx4 = data.reduce((sum, r) => sum + r.metricA ** 4, 0);
+      const sy = data.reduce((sum, r) => sum + r.metricB, 0);
+      const sxy = data.reduce((sum, r) => sum + r.metricA * r.metricB, 0);
+      const sx2y = data.reduce((sum, r) => sum + (r.metricA ** 2) * r.metricB, 0);
+      const [a, b, c] = solve3x3(
+        [[n, sx, sx2], [sx, sx2, sx3], [sx2, sx3, sx4]],
+        [sy, sxy, sx2y]
+      );
+      const points = Array.from({ length: 28 }, (_, i) => {
+        const x = xMin + ((xMax - xMin) * i) / 27;
+        const y = a + b * x + c * x * x;
+        const px = 7 + ((x - xMin) / (xMax - xMin)) * 86;
+        const py = 92 - ((y - yMin) / (yMax - yMin)) * 82;
+        return `${px.toFixed(2)},${py.toFixed(2)}`;
+      });
+      return `M ${points.join(" L ")}`;
+    }
+
+    function renderCase01() {
+      const ok = production.filter((r) => r.judgment === "合格").length;
+      const hold = production.filter((r) => r.shipping.includes("保留") || r.shipping.includes("不可")).length;
+      const rows = production.map((r) => `
+        <tr>
+          <td>${r.date}</td><td>${r.line}</td><td>${r.product}</td><td>${r.lot}</td><td>${r.location}</td>
+          <td>${r.actual}/${r.planned}</td><td>${chip(r.judgment)}</td><td>${chip(r.shipping)}</td><td>${r.next}</td>
+        </tr>
+      `);
+      const barRows = production.slice(0, 6).map((r) => {
+        const width = Math.max(8, Math.round((r.actual / r.planned) * 100));
+        return `<div class="bar-row"><span>${r.lot}</span><div class="bar-track"><div class="bar" style="width:${width}%; background:${r.judgment === "不合格" ? "var(--red)" : r.judgment === "保留" ? "var(--amber)" : "var(--blue)"}"></div></div></div>`;
+      }).join("");
+      return `
+        ${caseHeader("01", "生産計画・在庫管理・品質判定の連携基盤", "生産〜出荷までをロット単位で追える連携基盤。導入後、出荷判断の確認工数が1日2時間から15分に削減され、出荷ミスは月2件から0件に抑えられました。", ["複数アプリ連携", "ロット追跡", "出荷可否判定"])}
+        <div class="metric-row">
+          ${metric("対象ロット", production.length, "月間対象")}
+          ${metric("合格", ok, "最終判定")}
+          ${metric("出荷保留/不可", hold, "要確認")}
+          ${metric("連携領域", "3", "生産・在庫・品質")}
+        </div>
+        <div class="effect-row">
+          ${effectCard("2時間/日", "15分/日", "出荷判断確認時間")}
+          ${effectCard("紙帳票 30分", "リアルタイム検索", "ロット追跡工数")}
+          ${effectCard("月2件", "0件", "出荷ミス")}
+        </div>
+        <div class="diagram">
+          <div class="flow-diagram">
+            <div class="flow-box">生産予定</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">在庫管理</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">品質判定</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">出荷可否</div>
+          </div>
+        </div>
+        <div class="panel-grid">
+          <section class="panel">
+            <div class="panel-head"><h3>ロット別 状況一覧</h3>${chip("公開用サンプル")}</div>
+            <div class="panel-body">
+              ${table(["日付", "ライン", "製品", "ロット", "在庫位置", "実績/予定", "品質", "出荷", "次アクション"], rows)}
+            </div>
+          </section>
+          <aside class="panel">
+            <div class="panel-head"><h3>生産実績バー</h3><span class="status info">ガント風</span></div>
+            <div class="panel-body"><div class="chart">${barRows}</div></div>
+          </aside>
+        </div>
+      `;
+    }
+
+    function renderCase02() {
+      const colors = { "製品群I": "var(--blue)", "製品群II": "var(--green)", "製品群III": "var(--violet)" };
+      const xMin = 0.033;
+      const xMax = 0.046;
+      const yMin = 0.5;
+      const yMax = 3.1;
+      const curvePath = regressionPath(thermal, xMin, xMax, yMin, yMax);
+      const representativeRows = thermal.filter((_, index) => [0, 4, 7, 9, 13, 15, 20, 23].includes(index));
+      const rows = representativeRows.map((r) => `
+        <tr>
+          <td>${r.date}</td><td>${r.type}</td><td>${r.category}</td><td>${r.metricA.toFixed(3)}</td>
+          <td>${r.metricB.toFixed(1)}%</td><td>${r.metricC.toFixed(1)}</td><td>${chip(r.result)}</td><td>${r.group}</td>
+        </tr>
+      `);
+      const dots = thermal.map((r) => {
+        const x = ((r.metricA - xMin) / (xMax - xMin)) * 86 + 7;
+        const y = ((r.metricB - yMin) / (yMax - yMin)) * 82 + 8;
+        return `<span class="dot" title="${r.category} ${r.result}" style="left:${x}%; bottom:${y}%; background:${colors[r.category]}"></span>`;
+      }).join("");
+      return `
+        ${caseHeader("02", "多品種品質判定ダッシュボード", "品質指標を組み合わせて、区分ごとの合否を可視化。導入後、要確認品の見落としが30%減少し、判定作業が1ロットあたり2時間から30分に短縮されました。", ["多変量判定", "散布図可視化", "実験品管理"])}
+        <div class="metric-row">
+          ${metric("試験件数", thermal.length, "月間試験データ")}
+          ${metric("判定区分", "3", "製品群I / II / III")}
+          ${metric("要確認", thermal.filter((r) => r.result === "要確認").length, "追加確認候補")}
+          ${metric("不合格", thermal.filter((r) => r.result === "不合格").length, "上限超過")}
+        </div>
+        <div class="effect-row">
+          ${effectCard("要確認見落とし 月5件", "月3件", "見落とし件数")}
+          ${effectCard("2時間/ロット", "30分/ロット", "判定作業時間")}
+          ${effectCard("Excel集計", "自動プロット", "分析工数")}
+        </div>
+        <div class="diagram">
+          <div class="flow-diagram">
+            <div class="flow-box small">指標A</div>
+            <div class="flow-box small">指標B</div>
+            <div class="flow-box small">指標C</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">製品群判定</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">合否判定</div>
+          </div>
+        </div>
+        <div class="panel-grid">
+          <section class="panel">
+            <div class="panel-head"><h3>品質指標A × 品質指標B 散布図</h3><span class="status info">品質分析</span></div>
+            <div class="panel-body">
+              <div class="chart scatter">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                  <path class="regression-line" d="${curvePath}"></path>
+                </svg>
+                ${dots}
+                <span class="axis-label y">品質指標B</span>
+                <span class="axis-label x">品質指標A / 二次回帰</span>
+              </div>
+              <div class="legend">
+                <span><i class="swatch" style="background:var(--blue)"></i>製品群I</span>
+                <span><i class="swatch" style="background:var(--green)"></i>製品群II</span>
+                <span><i class="swatch" style="background:var(--violet)"></i>製品群III</span>
+                <span><i class="swatch" style="background:var(--case-color); border-radius:2px; width:20px;"></i>回帰曲線</span>
+              </div>
+            </div>
+          </section>
+          <aside class="panel">
+            <div class="panel-head"><h3>代表試験データ</h3>${chip(`${representativeRows.length}件表示`)}</div>
+            <div class="panel-body">
+              <p>散布図は24件で回帰曲線を計算し、表はポートフォリオ用に代表値だけを表示しています。</p>
+              ${table(["日付", "種別", "区分", "指標A", "指標B", "指標C", "判定", "グループ"], rows)}
+            </div>
+          </aside>
+        </div>
+      `;
+    }
+
+    function renderCase03() {
+      const shelfRow = (items) => `
+        <div class="rack-row">
+          ${items.map((r) => {
+            const cls = r.stamp === "不適合" ? "is-ng" : r.stamp === "保留" || r.stamp === "条件付" || r.stamp === "未検査" ? "is-hold" : "";
+            return `<div class="shelf ${cls}"><span>${r.location}</span><strong>${r.product}</strong><span>${r.qty}個 / ${r.stamp}</span>${chip(r.judgment)}</div>`;
+          }).join("")}
+        </div>
+      `;
+      const rack = shelfRow(warehouse.slice(0, 4)) + shelfRow(warehouse.slice(4, 8));
+      const slots = warehouse.map((r) => {
+        const cls = r.stamp === "不適合" ? "is-ng" : r.stamp === "保留" || r.stamp === "条件付" || r.stamp === "未検査" ? "is-hold" : "";
+        return `<div class="slot ${cls}"><span>${r.location}</span><strong>${r.product}</strong><span>${r.lot}</span><span>${r.qty} 個 / ${r.stamp}</span>${chip(r.judgment)}</div>`;
+      }).join("");
+      const rows = warehouse.map((r) => `
+        <tr><td>${r.location}</td><td>${r.product}</td><td>${r.lot}</td><td>${r.qty}</td><td>${chip(r.stamp)}</td><td>${chip(r.judgment)}</td></tr>
+      `);
+      return `
+        ${caseHeader("03", "在庫管理・出荷可否・不適合品移動アプリ", "在庫位置・ロット・出荷可否を3D置場風に可視化。導入後、在庫探しの時間が1件あたり15分から1分に短縮され、出荷遅延が月4件から1件に削減されました。", ["マトリクス在庫", "出荷予定照合", "不適合品追跡"])}
+        <div class="metric-row">
+          ${metric("在庫スロット", warehouse.length, "管理対象")}
+          ${metric("出荷可", warehouse.filter((r) => r.judgment === "出荷可").length, "候補")}
+          ${metric("保留/不可", warehouse.filter((r) => r.judgment !== "出荷可").length, "確認対象")}
+          ${metric("追跡単位", "在庫位置 + ロット", "現場運用")}
+        </div>
+        <div class="effect-row">
+          ${effectCard("15分/件", "1分/件", "在庫探し時間")}
+          ${effectCard("月4件", "月1件", "出荷遅延")}
+          ${effectCard("電話・口頭確認", "アプリ即時確認", "情報共有工数")}
+        </div>
+        <div class="diagram rack-3d">
+          ${rack}
+        </div>
+        <div style="display:flex;justify-content:center;margin:var(--space-lg) 0;">
+          <button type="button" class="btn" data-open-warehouse>3D在庫マップをこの画面で開く</button>
+        </div>
+        <div class="panel-grid">
+          <section class="panel">
+            <div class="panel-head"><h3>在庫グリッド</h3>${chip("現場画面")}</div>
+            <div class="panel-body"><div class="warehouse">${slots}</div></div>
+          </section>
+          <aside class="panel">
+            <div class="panel-head"><h3>出荷可否一覧</h3>${chip("出荷予定照合")}</div>
+            <div class="panel-body">
+              ${table(["在庫位置", "製品", "ロット", "数量", "状態", "出荷判定"], rows)}
+            </div>
+          </aside>
+        </div>
+      `;
+    }
+
+    function renderWarehouseModal() {
+      const usedLocations = new Set(warehouse.map((record) => record.location)).size;
+      const lotCount = warehouse.length;
+      const totalQty = warehouse.reduce((sum, record) => sum + record.qty, 0);
+      const holdCount = warehouse.filter((record) => record.judgment !== "出荷可" && record.judgment !== "出荷対象外").length;
+      return `
+        <div class="metric-row">
+          ${metric("使用中置場", usedLocations, "エリアA / B")}
+          ${metric("表示ロット", lotCount, "公開用")}
+          ${metric("在庫数", totalQty, "個")}
+          ${metric("要確認", holdCount, "出荷判定")}
+        </div>
+        <div class="print-note">既存の3D置場マップ設計を参考に、エリアA・中央通路・エリアBの構成で整理した公開用モックです。実在の置場寸法や品番は含みません。</div>
+        <div class="warehouse-three-shell">
+          <div class="warehouse-three-canvas" id="warehouseThreeCanvas">
+            <div class="warehouse-three-toolbar" id="warehouseThreeToolbar">
+              <button type="button" data-view="overview">俯瞰</button>
+              <button type="button" data-view="top">上面</button>
+              <button type="button" data-view="side">正面</button>
+              <button type="button" data-view="left">左側</button>
+              <button type="button" data-view="right">右側</button>
+              <button type="button" data-action="rotate-left">左回転</button>
+              <button type="button" data-action="rotate-right">右回転</button>
+              <button type="button" data-action="zoom-in">拡大</button>
+              <button type="button" data-action="zoom-out">縮小</button>
+              <button type="button" data-action="pan-center">中央</button>
+            </div>
+            <div class="warehouse-three-guide">
+              <span>ドラッグ: 回転</span>
+              <span>Shift/Ctrl/右ドラッグ: 視点移動</span>
+              <span>ホイール: 拡大縮小</span>
+            </div>
+          </div>
+          <aside class="warehouse-three-side">
+            <div class="three-badge"><span>配置</span><strong>エリアA / 中央通路 / エリアB</strong></div>
+            <div class="three-badge"><span>表示内容</span><strong>置場・段数・出荷判定</strong></div>
+            <div class="legend">
+              <span><i class="swatch" style="background:var(--blue)"></i>出荷可</span>
+              <span><i class="swatch" style="background:var(--amber)"></i>保留・条件付</span>
+              <span><i class="swatch" style="background:var(--red)"></i>不適合</span>
+              <span><i class="swatch" style="background:var(--steel)"></i>資材</span>
+            </div>
+          </aside>
+        </div>
+      `;
+    }
+
+    function createTextSprite(text, color = "#0f172a", background = "rgba(255,255,255,.94)", width = 190, height = 46) {
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const context = canvas.getContext("2d");
+      context.fillStyle = background;
+      context.beginPath();
+      if (context.roundRect) {
+        context.roundRect(0, 0, width, height, 10);
+      } else {
+        context.rect(0, 0, width, height);
+      }
+      context.fill();
+      context.strokeStyle = "rgba(15,23,42,.16)";
+      context.stroke();
+      context.fillStyle = color;
+      context.font = "700 20px sans-serif";
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.fillText(text, width / 2, height / 2);
+      const texture = new THREE.CanvasTexture(canvas);
+      const material = new THREE.SpriteMaterial({ map: texture, transparent: true });
+      const sprite = new THREE.Sprite(material);
+      sprite.scale.set(width / 90, height / 90, 1);
+      return sprite;
+    }
+
+    function initWarehouse3D(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container || typeof THREE === "undefined") return null;
+      const toolbar = document.getElementById("warehouseThreeToolbar");
+      const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+      const cameraTargetY = 0.8;
+      const panLimitX = 9;
+      const panLimitZ = 7;
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xf8fafc);
+      const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 1000);
+      const cameraTarget = new THREE.Vector3(0, cameraTargetY, 0);
+      const setCamera = (view) => {
+        cameraTarget.set(0, cameraTargetY, 0);
+        if (view === "top") {
+          camera.position.set(0, 24, 0.01);
+        } else if (view === "side") {
+          camera.position.set(0, 7.5, 18);
+        } else if (view === "left") {
+          camera.position.set(-15, 8, 5);
+        } else if (view === "right") {
+          camera.position.set(15, 8, -5);
+        } else {
+          camera.position.set(0, 13, 10);
+        }
+        camera.lookAt(cameraTarget);
+      };
+      setCamera("overview");
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      if (THREE.SRGBColorSpace) renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.shadowMap.enabled = true;
+      container.appendChild(renderer.domElement);
+
+      const world = new THREE.Group();
+      scene.add(world);
+      scene.add(new THREE.HemisphereLight(0xffffff, 0xcbd5e1, 1.6));
+      const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
+      keyLight.position.set(6, 12, 8);
+      keyLight.castShadow = true;
+      scene.add(keyLight);
+
+      const floor = new THREE.Mesh(
+        new THREE.BoxGeometry(13.8, 0.18, 8.8),
+        new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.78 })
+      );
+      floor.receiveShadow = true;
+      floor.position.y = -0.1;
+      world.add(floor);
+
+      const aisle = new THREE.Mesh(
+        new THREE.BoxGeometry(13, 0.05, 1.25),
+        new THREE.MeshStandardMaterial({ color: 0xdbeafe, roughness: 0.72 })
+      );
+      aisle.position.y = 0.04;
+      world.add(aisle);
+      const aisleLabel = createTextSprite("中央通路", "#1d4ed8", "rgba(239,246,255,.96)", 150, 42);
+      aisleLabel.position.set(0, 0.42, 0);
+      world.add(aisleLabel);
+
+      const areas = [
+        { key: "A", label: "エリアA", z: -3.1, locations: ["A-01", "A-03", "A-04", "A-08", "A-12", "A-18"] },
+        { key: "B", label: "エリアB", z: 3.1, locations: ["B-00", "B-03", "B-08", "B-10", "B-14", "B-16"] }
+      ];
+      const byLocation = new Map(warehouse.map((record) => [record.location, record]));
+      const raycaster = new THREE.Raycaster();
+      const pointer = new THREE.Vector2();
+      const selectable = [];
+      const materialByStatus = {
+        ok: new THREE.MeshStandardMaterial({ color: 0x2563eb, roughness: 0.52, metalness: 0.05 }),
+        hold: new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.56, metalness: 0.04 }),
+        ng: new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.58, metalness: 0.04 }),
+        material: new THREE.MeshStandardMaterial({ color: 0x64748b, roughness: 0.62, metalness: 0.03 }),
+        empty: new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.86 })
+      };
+      const baseMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.8 });
+      const edgeMaterial = new THREE.LineBasicMaterial({ color: 0x94a3b8, transparent: true, opacity: 0.55 });
+
+      areas.forEach((area) => {
+        const areaLabel = createTextSprite(area.label, "#334155", "rgba(255,255,255,.95)", 150, 42);
+        areaLabel.position.set(-7.2, 0.8, area.z);
+        world.add(areaLabel);
+
+        area.locations.forEach((location, index) => {
+          const x = -5.4 + index * 2.15;
+          const base = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.16, 1.45), baseMaterial);
+          base.position.set(x, 0.08, area.z);
+          base.receiveShadow = true;
+          base.castShadow = true;
+          world.add(base);
+
+          const edges = new THREE.LineSegments(new THREE.EdgesGeometry(base.geometry), edgeMaterial);
+          edges.position.copy(base.position);
+          world.add(edges);
+
+          const item = byLocation.get(location);
+          if (!item) {
+            const empty = new THREE.Mesh(new THREE.BoxGeometry(1.28, 0.08, 1.05), materialByStatus.empty);
+            empty.position.set(x, 0.27, area.z);
+            world.add(empty);
+          } else {
+            const statusKey = item.status === "資材" ? "material" : item.stamp === "不適合" ? "ng" : item.judgment === "出荷可" ? "ok" : "hold";
+            const cubeCount = Math.min(item.level, 4);
+            for (let level = 0; level < cubeCount; level += 1) {
+              const cube = new THREE.Mesh(new THREE.BoxGeometry(1.08, 0.55, 0.88), materialByStatus[statusKey]);
+              cube.position.set(x + ((item.position % 3) - 1) * 0.12, 0.46 + level * 0.58, area.z);
+              cube.userData.location = item.location;
+              cube.castShadow = true;
+              cube.receiveShadow = true;
+              world.add(cube);
+              selectable.push(cube);
+
+              const cubeEdges = new THREE.LineSegments(new THREE.EdgesGeometry(cube.geometry), new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.45 }));
+              cubeEdges.position.copy(cube.position);
+              world.add(cubeEdges);
+            }
+            const label = createTextSprite(`${location} ${item.level}段`, "#0f172a", "rgba(255,255,255,.96)", 170, 42);
+            label.position.set(x, 1.12 + cubeCount * 0.58, area.z);
+            world.add(label);
+          }
+        });
+      });
+
+      let selectedMesh = null;
+      let isDragging = false;
+      let didDrag = false;
+      let dragMode = "rotate";
+      let lastX = 0;
+      let lastY = 0;
+
+      const resize = () => {
+        const rect = container.getBoundingClientRect();
+        const width = Math.max(320, rect.width);
+        const height = Math.max(360, rect.height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height, false);
+      };
+
+      const zoomCamera = (scale) => {
+        const offset = camera.position.clone().sub(cameraTarget);
+        const dist = clamp(offset.length() * scale, 7, 36);
+        offset.setLength(dist);
+        camera.position.copy(cameraTarget).add(offset);
+        camera.lookAt(cameraTarget);
+      };
+
+      const applyCameraTargetMove = (dx, dz) => {
+        const nextX = clamp(cameraTarget.x + dx, -panLimitX, panLimitX);
+        const nextZ = clamp(cameraTarget.z + dz, -panLimitZ, panLimitZ);
+        const actualX = nextX - cameraTarget.x;
+        const actualZ = nextZ - cameraTarget.z;
+        if (!actualX && !actualZ) return;
+        cameraTarget.set(nextX, cameraTargetY, nextZ);
+        camera.position.x += actualX;
+        camera.position.z += actualZ;
+        camera.lookAt(cameraTarget);
+      };
+
+      const panCameraByScreen = (dx, dy, strength = 1) => {
+        camera.updateMatrixWorld();
+        const distance = camera.position.clone().sub(cameraTarget).length();
+        const scale = (distance / Math.max(renderer.domElement.clientHeight || container.clientHeight || 1, 1)) * 1.45 * strength;
+        const right = new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld, 0);
+        right.y = 0;
+        if (right.lengthSq() < 0.0001) right.set(1, 0, 0);
+        right.normalize();
+        const forward = new THREE.Vector3().subVectors(cameraTarget, camera.position);
+        forward.y = 0;
+        if (forward.lengthSq() < 0.0001) {
+          forward.set(0, 0, -1);
+        } else {
+          forward.normalize();
+        }
+        const move = right.multiplyScalar(-dx * scale).add(forward.multiplyScalar(dy * scale));
+        applyCameraTargetMove(move.x, move.z);
+      };
+
+      const pickMesh = (event) => {
+        const rect = renderer.domElement.getBoundingClientRect();
+        pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+        raycaster.setFromCamera(pointer, camera);
+        return raycaster.intersectObjects(selectable, false)[0]?.object || null;
+      };
+
+      const onPointerDown = (event) => {
+        event.preventDefault();
+        isDragging = true;
+        didDrag = false;
+        dragMode = event.button === 1 || event.button === 2 || event.shiftKey || event.ctrlKey ? "pan" : "rotate";
+        lastX = event.clientX;
+        lastY = event.clientY;
+        renderer.domElement.setPointerCapture?.(event.pointerId);
+      };
+      const onPointerMove = (event) => {
+        if (!isDragging) {
+          container.classList.toggle("is-hovering", !!pickMesh(event));
+          return;
+        }
+        const dx = event.clientX - lastX;
+        const dy = event.clientY - lastY;
+        if (Math.abs(dx) + Math.abs(dy) > 4) didDrag = true;
+        if (dragMode === "pan") {
+          panCameraByScreen(dx, dy, 1);
+        } else {
+          world.rotation.y += dx * 0.004;
+          world.rotation.x = clamp(world.rotation.x + dy * 0.003, -0.65, 0.55);
+        }
+        lastX = event.clientX;
+        lastY = event.clientY;
+      };
+      const onPointerUp = (event) => {
+        isDragging = false;
+        renderer.domElement.releasePointerCapture?.(event.pointerId);
+        const wasPan = dragMode === "pan";
+        dragMode = "rotate";
+        if (didDrag || wasPan) return;
+        const mesh = pickMesh(event);
+        if (!mesh) return;
+        if (selectedMesh) selectedMesh.scale.set(1, 1, 1);
+        selectedMesh = mesh;
+        selectedMesh.scale.set(1.08, 1.08, 1.08);
+      };
+      const onPointerLeave = () => {
+        isDragging = false;
+        dragMode = "rotate";
+        container.classList.remove("is-hovering");
+      };
+      const onWheel = (event) => {
+        event.preventDefault();
+        zoomCamera(event.deltaY > 0 ? 1.08 : 0.92);
+      };
+      const onContextMenu = (event) => {
+        event.preventDefault();
+      };
+      const onToolbarClick = (event) => {
+        const button = event.target.closest("[data-view], [data-action]");
+        if (!button) return;
+        const view = button.dataset.view;
+        const action = button.dataset.action;
+        if (view) {
+          setCamera(view);
+          if (view === "overview") world.rotation.set(0, 0, 0);
+          return;
+        }
+        if (action === "rotate-left") world.rotation.y -= 0.2;
+        if (action === "rotate-right") world.rotation.y += 0.2;
+        if (action === "zoom-in") zoomCamera(0.88);
+        if (action === "zoom-out") zoomCamera(1.14);
+        if (action === "pan-center") applyCameraTargetMove(-cameraTarget.x, -cameraTarget.z);
+      };
+
+      renderer.domElement.addEventListener("pointerdown", onPointerDown);
+      renderer.domElement.addEventListener("pointermove", onPointerMove);
+      renderer.domElement.addEventListener("pointerup", onPointerUp);
+      renderer.domElement.addEventListener("pointerleave", onPointerLeave);
+      renderer.domElement.addEventListener("wheel", onWheel, { passive: false });
+      renderer.domElement.addEventListener("contextmenu", onContextMenu);
+      toolbar?.addEventListener("click", onToolbarClick);
+      window.addEventListener("resize", resize);
+      resize();
+
+      let frameId = null;
+      const animate = () => {
+        renderer.render(scene, camera);
+        frameId = requestAnimationFrame(animate);
+      };
+      animate();
+
+      return {
+        destroy() {
+          cancelAnimationFrame(frameId);
+          window.removeEventListener("resize", resize);
+          renderer.domElement.removeEventListener("pointerdown", onPointerDown);
+          renderer.domElement.removeEventListener("pointermove", onPointerMove);
+          renderer.domElement.removeEventListener("pointerup", onPointerUp);
+          renderer.domElement.removeEventListener("pointerleave", onPointerLeave);
+          renderer.domElement.removeEventListener("wheel", onWheel);
+          renderer.domElement.removeEventListener("contextmenu", onContextMenu);
+          toolbar?.removeEventListener("click", onToolbarClick);
+          renderer.dispose();
+          container.querySelector("canvas")?.remove();
+        }
+      };
+    }
+
+    function renderCase04() {
+      const rows = claims.map((r) => `
+        <tr><td>${r.id}</td><td>${r.date}</td><td>${r.customer}</td><td>${r.type}</td><td>${r.step}</td><td>${chip(r.status)}</td><td>${r.m4}</td><td>${r.due}</td></tr>
+      `);
+      const steps = ["受付情報", "一次処理・調査", "判定・是正計画", "是正処置", "水平展開", "有効性確認・完了判断"].map((s, i) => `
+        <div class="flow-box">${i + 1}. ${s}</div>
+        ${i < 5 ? '<span class="flow-arrow">→</span>' : ''}
+      `).join("");
+      return `
+        ${caseHeader("04", "クレーム管理・是正処置ウィザード", "受付〜完了までを6ステップで進める入力ウィザード。導入後、是正処置の期限遅れが60%減少し、水平展開の漏れが防止され、監査時の記録集約工数が8時間から30分に短縮されました。", ["6ステップウィザード", "4M分析", "水平展開"])}
+        <div class="metric-row">
+          ${metric("クレーム件数", claims.length, "月間対象")}
+          ${metric("対応中", claims.filter((r) => r.status === "対応中").length, "是正中")}
+          ${metric("完了", claims.filter((r) => r.status === "完了").length, "有効性確認済")}
+          ${metric("4M分類", "Man / Machine / Method / Material", "原因分析")}
+        </div>
+        <div class="effect-row">
+          ${effectCard("期限遅れ 月5件", "月2件", "是正処置期限遅れ")}
+          ${effectCard("8時間", "30分", "監査記録集約工数")}
+          ${effectCard("水平展開の記録分散", "一元管理", "情報の散在防止")}
+        </div>
+        <div class="diagram">
+          <div class="flow-diagram">${steps}</div>
+        </div>
+        <div class="panel-grid">
+          <section class="panel">
+            <div class="panel-head"><h3>ステップ入力のイメージ</h3>${chip("入力漏れ対策")}</div>
+            <div class="panel-body"><div class="wizard">${["受付情報", "一次処理・調査", "判定・是正計画", "是正処置", "水平展開", "有効性確認・完了判断"].map((s, i) => `<div class="wizard-step"><span class="step-no">${i + 1}</span><strong>${s}</strong>${chip(i < 3 ? "入力OK" : i === 3 ? "対応中" : "未着手")}</div>`).join("")}</div></div>
+          </section>
+          <aside class="panel">
+            <div class="panel-head"><h3>案件一覧</h3>${chip("公開用")}</div>
+            <div class="panel-body">
+              ${table(["ID", "受付日", "顧客", "種別", "現在ステップ", "状態", "4M", "期限"], rows)}
+            </div>
+          </aside>
+        </div>
+      `;
+    }
+
+    const renderers = {
+      case01: renderCase01,
+      case02: renderCase02,
+      case03: renderCase03,
+      case04: renderCase04
+    };
+
+    Object.entries(renderers).forEach(([id, render]) => {
+      document.getElementById(id).innerHTML = render();
+    });
+
+    const warehouseModal = document.getElementById("warehouseModal");
+    const warehouseModalBody = document.getElementById("warehouseModalBody");
+    let activeWarehouse3D = null;
+
+    function openWarehouseModal() {
+      if (activeWarehouse3D) activeWarehouse3D.destroy();
+      warehouseModalBody.innerHTML = renderWarehouseModal();
+      warehouseModal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      activeWarehouse3D = initWarehouse3D("warehouseThreeCanvas");
+    }
+
+    function closeWarehouseModal() {
+      warehouseModal.classList.remove("open");
+      document.body.style.overflow = "";
+      if (activeWarehouse3D) {
+        activeWarehouse3D.destroy();
+        activeWarehouse3D = null;
+      }
+    }
+
+    document.querySelectorAll("[data-open-warehouse]").forEach((button) => {
+      button.addEventListener("click", openWarehouseModal);
+    });
+
+    document.querySelectorAll("[data-close-modal]").forEach((button) => {
+      button.addEventListener("click", closeWarehouseModal);
+    });
+
+    warehouseModal.addEventListener("click", (event) => {
+      if (event.target === warehouseModal) closeWarehouseModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && warehouseModal.classList.contains("open")) {
+        closeWarehouseModal();
+      }
+    });
+
+    if (new URLSearchParams(window.location.search).get("warehouse") === "1") {
+      openWarehouseModal();
+    }
+
+    document.querySelectorAll(".nav button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const id = button.dataset.case;
+        document.querySelectorAll(".nav button").forEach((item) => item.classList.toggle("active", item === button));
+        document.querySelectorAll(".case").forEach((section) => section.classList.toggle("active", section.id === id));
+      });
+    });
+  </script>
+</body>
+</html>

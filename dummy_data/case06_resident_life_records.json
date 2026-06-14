@@ -1,0 +1,50 @@
+[
+  {
+    "id": "R001",
+    "category": "市役所",
+    "title": "住民票を取得する",
+    "deadline": "到着後14日以内",
+    "done": true,
+    "note": "自動車書類の住所変更にも使用"
+  },
+  {
+    "id": "R002",
+    "category": "入管",
+    "title": "在留カードの住所変更を届け出る",
+    "deadline": "転入後14日以内",
+    "done": true,
+    "note": "市役所手続き後に実施"
+  },
+  {
+    "id": "R003",
+    "category": "銀行",
+    "title": "口座開設を予約する",
+    "deadline": "1ヶ月以内",
+    "done": false,
+    "note": "在留カード・印鑑・雇用証明が必要"
+  },
+  {
+    "id": "R004",
+    "category": "生活",
+    "title": "ゴミ出しルールを確認する",
+    "deadline": "即時",
+    "done": true,
+    "note": "自治体HPの収集カレンダー参照"
+  },
+  {
+    "id": "R005",
+    "category": "雇用",
+    "title": "健康保険・年金の手続きを確認",
+    "deadline": "入社後",
+    "done": false,
+    "note": "会社の担当者へ確認"
+  },
+  {
+    "id": "R006",
+    "category": "市役所",
+    "title": "国民健康保険に加入する",
+    "deadline": "転入後14日以内",
+    "done": false,
+    "note": "住民票と在留カードを持参"
+  }
+]

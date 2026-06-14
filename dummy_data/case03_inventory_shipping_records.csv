@@ -1,0 +1,9 @@
+record_id,area,location_no,position_no,level_no,product_alias,lot_no,branch_no,qty,stamp_status,source_location_no,inventory_status,shipping_plan_no,shipping_required_qty,shipping_judgment,quality_sync_status,operator_note
+3001,A,A-03,4,3,製品A,260601A01,1,28,正常,,出荷待ち,SHP-001,24,出荷可,同期済,先入先出対象
+3002,A,A-04,6,4,製品A,260601A02,2,30,保留,,出荷待ち,SHP-001,24,出荷保留,同期済,確認待ち
+3003,A,A-08,9,2,製品B,260602B01,1,24,正常,,出荷待ち,SHP-002,24,出荷可,同期済,出荷予定一致
+3004,B,B-03,5,2,製品B,260602B02,1,18,不適合,B-01,積替済,SHP-002,24,出荷不可,同期済,不適合移動済
+3005,B,B-08,7,3,製品C,260603C01,1,20,正常,,出荷待ち,SHP-003,20,出荷可,同期済,証明書作成対象
+3006,B,B-10,10,4,製品C,260603C02,2,19,条件付,,一部出荷済,SHP-003,20,条件付出荷,同期済,品質保証確認後
+3007,A,A-12,12,1,製品D,260604B01,1,14,未検査,,一部出荷済,SHP-004,16,出荷保留,未同期,検査完了待ち
+3008,B,B-14,2,2,資材,MAT-260604,1,16,正常,,資材,-,0,出荷対象外,同期済,資材置場
