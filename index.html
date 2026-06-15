@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>業務改善・DXポートフォリオ</title>
+  <title>業務改善・DX支援ポートフォリオ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
@@ -16,6 +16,7 @@
       --line: oklch(86% 0.015 215);
       --steel: oklch(44% 0.05 220);
       --accent: oklch(55% 0.12 195);
+      --blue: oklch(56% 0.11 230);
       --green: oklch(58% 0.11 155);
       --amber: oklch(72% 0.12 75);
       --red: oklch(58% 0.14 25);
@@ -43,7 +44,7 @@
       color: var(--ink);
       font-size: 15px;
       scroll-behavior: smooth;
-      line-break: normal;
+      line-break: strict;
       overflow-wrap: break-word;
     }
 
@@ -207,6 +208,10 @@
       font-size: 0.88rem;
     }
 
+    .skill-item-wide {
+      grid-column: 1 / -1;
+    }
+
     .site-header {
       position: sticky;
       top: 0;
@@ -325,7 +330,7 @@
     }
 
     .areas-section .system-map {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
     }
 
     .hero-copy {
@@ -336,6 +341,11 @@
     .hero-copy h1 {
       font-size: clamp(1.8rem, 6vw, 4.5rem);
       line-height: 1.2;
+      text-wrap: balance;
+    }
+
+    .hero-title-line {
+      display: inline;
       white-space: nowrap;
     }
 
@@ -407,12 +417,14 @@
       font-family: "M PLUS 1", sans-serif;
       font-size: 0.9rem;
       font-weight: 800;
+      overflow-wrap: anywhere;
     }
 
     .map-node span {
       font-size: 0.76rem;
       color: var(--muted);
       line-height: 1.45;
+      overflow-wrap: anywhere;
     }
 
     .profile-section {
@@ -420,9 +432,11 @@
       border-top: 1px solid var(--line);
     }
 
+    /* 大きな空白の原因: .profile-body の gap が広く、.profile-body p の line-height が 1.85・max-width が 42em で、
+       段落間の余白と長い行が合わさって本文が分断されて見えていた */
     .profile-card {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(240px, 0.35fr);
+      grid-template-columns: minmax(0, 1fr) 280px;
       gap: var(--space-2xl);
       padding: var(--space-2xl);
       background: var(--surface);
@@ -433,17 +447,19 @@
 
     .profile-body {
       display: grid;
-      gap: var(--space-lg);
+      gap: var(--space-md);
+      align-content: start;
     }
 
     .profile-body p {
       font-size: 1rem;
-      max-width: 42em;
+      max-width: 38em;
+      line-height: 1.7;
     }
 
     .profile-meta {
       display: grid;
-      gap: var(--space-md);
+      gap: var(--space-lg);
       align-content: start;
     }
 
@@ -741,6 +757,7 @@
     .panel-head {
       padding: var(--space-lg) var(--space-lg) var(--space-md);
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       gap: var(--space-md);
       align-items: center;
@@ -813,6 +830,13 @@
       border-radius: 12px;
       background: color-mix(in oklch, var(--surface), var(--paper) 40%);
       box-shadow: var(--shadow-sm);
+    }
+
+    .flow-step strong,
+    .wizard-step strong,
+    .timeline-item strong,
+    .small-item strong {
+      overflow-wrap: anywhere;
     }
 
     .step-no {
@@ -963,6 +987,13 @@
       color: var(--muted);
       background: color-mix(in oklch, var(--surface), var(--amber) 5%);
       line-height: 1.7;
+    }
+
+    .case-note {
+      white-space: nowrap;
+      overflow-x: auto;
+      padding: var(--space-md) var(--space-lg);
+      font-size: 0.82rem;
     }
 
     .check-progress {
@@ -1448,10 +1479,16 @@
       }
       .system-map { grid-template-columns: repeat(2, 1fr); }
       .areas-section .system-map { grid-template-columns: repeat(2, 1fr); }
-      .profile-card { grid-template-columns: 1fr; }
+      .profile-card { grid-template-columns: 1fr; gap: var(--space-xl); padding: var(--space-xl); }
       .panel-grid { grid-template-columns: 1fr; }
       .case-header { grid-template-columns: 1fr; }
       .toolbar { justify-content: flex-start; }
+    }
+
+    @media (max-width: 1100px) {
+      .hero-title-line {
+        display: block;
+      }
     }
 
     @media (max-width: 720px) {
@@ -1460,6 +1497,20 @@
       .rail-nav { grid-template-columns: 1fr; }
       .skill-grid { grid-template-columns: 1fr; }
       .hero { padding-block: var(--space-3xl); }
+      .hero-copy { gap: var(--space-lg); }
+      .hero-copy h1 {
+        max-width: 100%;
+        font-size: clamp(2rem, 9vw, 2.45rem);
+        line-height: 1.18;
+      }
+      .hero-title-line {
+        display: block;
+      }
+      .hero-copy p,
+      .hero-subtitle {
+        font-size: 1rem !important;
+        line-height: 1.75;
+      }
       .system-map { grid-template-columns: repeat(2, 1fr); }
       .metric-row { grid-template-columns: 1fr; }
       .effect-row { grid-template-columns: 1fr; }
@@ -1468,8 +1519,62 @@
       .warehouse-three-canvas { min-height: 420px; }
       .modal-backdrop { padding: var(--space-md); }
       .panel-head, .flow-step, .wizard-step { grid-template-columns: 1fr; }
+      .flow-step,
+      .wizard-step,
+      .timeline-item {
+        justify-items: start;
+      }
+      .timeline {
+        padding-left: 0;
+      }
+      .timeline::before,
+      .timeline-item::before {
+        display: none;
+      }
+      .bar-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+      }
+      .rack-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .modal-head,
+      .modal-body {
+        padding: var(--space-lg);
+      }
       .hero-cta { flex-direction: column; }
       .btn { justify-content: center; }
+    }
+
+    @media (max-width: 430px) {
+      .container,
+      .portfolio-shell,
+      .site-header .container {
+        width: min(100% - 32px, 1120px);
+      }
+      .areas-section .system-map,
+      .system-map {
+        grid-template-columns: 1fr;
+      }
+      .map-node {
+        min-height: 0;
+      }
+      .case {
+        gap: var(--space-xl);
+        padding-bottom: var(--space-3xl);
+        margin-bottom: var(--space-3xl);
+      }
+      .panel-body,
+      .chart,
+      .diagram,
+      .skill-item,
+      .metric,
+      .effect-card {
+        padding: var(--space-md);
+      }
+      th, td {
+        padding: 11px 10px;
+      }
     }
 
     @media print {
@@ -1486,7 +1591,7 @@
     <div class="container">
       <div class="site-brand">
         <span class="eyebrow">Portfolio</span>
-        <strong>DX Portfolio</strong>
+        <strong>業務改善・DX支援</strong>
       </div>
       <nav class="site-nav" aria-label="ページ内ナビ">
         <a href="#about">ABOUT</a>
@@ -1500,8 +1605,9 @@
   <section class="hero">
     <div class="container">
       <div class="hero-copy">
-        <h1>業務改善からDX化まで</h1>
-        <p>JIS品質管理者 × 業務改善 × 生成AI。kintoneを中心に、Webアプリやスマホアプリも組み合わせて、現場が使いやすい業務システムを作ります。</p>
+        <h1><span class="hero-title-line">業務改善・DX支援</span><span class="hero-title-line">ポートフォリオ</span></h1>
+        <p class="hero-subtitle" style="font-size:1.25rem;font-weight:700;color:var(--ink);max-width:34em;">品質管理に強い業務アプリ設計・開発</p>
+        <p>JIS品質管理の視点を活かし、現場業務の整理からデジタル化、業務アプリ開発、生成AI活用まで支援します。紙やExcelで分散している情報を整理し、入力しやすく、確認しやすく、判断しやすい仕組みに変えていきます。</p>
         <div class="hero-cta">
           <a href="#about" class="btn">自己紹介を見る</a>
           <a href="#works" class="btn ghost">制作実績を見る</a>
@@ -1516,11 +1622,12 @@
         <div class="eyebrow">AREAS</div>
         <h2>対応領域</h2>
       </div>
-      <div class="system-map" aria-label="システム構成図">
-        <div class="map-node"><strong>Schedule</strong><span>生産予定 / ガント / 在庫導線</span></div>
-        <div class="map-node"><strong>Inventory</strong><span>在庫管理 / 出荷可否 / 不適合</span></div>
-        <div class="map-node"><strong>Quality</strong><span>品質集約 / 最終合否 / 朝会</span></div>
-        <div class="map-node"><strong>Claims</strong><span>クレーム / 是正 / 水平展開</span></div>
+      <div class="system-map" aria-label="対応領域">
+        <div class="map-node"><strong>製造</strong><span>生産予定 / 工程管理 / 進捗の見える化</span></div>
+        <div class="map-node"><strong>品質</strong><span>検査記録 / 合否判定 / 不適合対応</span></div>
+        <div class="map-node"><strong>在庫</strong><span>在庫管理 / 出荷可否 / ロット追跡</span></div>
+        <div class="map-node"><strong>顧客フィードバック</strong><span>クレーム / 是正処置 / 水平展開</span></div>
+        <div class="map-node"><strong>業務アプリ化</strong><span>紙・Excelの整理 / 入力補助 / 自動集計</span></div>
       </div>
     </div>
   </section>
@@ -1536,7 +1643,7 @@
           <a href="#case01" class="rail-sub">連携基盤 <span>01</span></a>
           <a href="#case02" class="rail-sub">品質分析 <span>02</span></a>
           <a href="#case03" class="rail-sub">在庫管理 <span>03</span></a>
-          <a href="#case04" class="rail-sub">クレーム管理 <span>04</span></a>
+          <a href="#case04" class="rail-sub">顧客FB・是正 <span>04</span></a>
           <a href="#contact">お問い合わせ方法 <span>CONTACT</span></a>
         </nav>
       </section>
@@ -1548,19 +1655,24 @@
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">ABOUT</div>
-        <h2>JIS品質管理者として、業務改善からDX化を支援</h2>
+        <h2>品質管理に強い業務改善支援</h2>
       </div>
       <div class="profile-card">
         <div class="profile-body">
-          <p><strong>JIS品質管理者の資格を持ち、品質管理の考え方を軸に業務改善からDX化まで支援する開発者です。</strong></p>
-          <p>JIS Q 9001（ISO 9001）に基づく品質管理では、受入検査・工程内検査・出荷検査といった検査フロー、ロットのトレーサビリティ、不適合品の管理、是正処置のPDCAなどを明文化したプロセスとして運用します。これらのフローが紙やExcelのままだと、入力漏れや承認の遅れ、履歴の散在といった課題が起きやすいため、まずは現場の業務を整理し、最適なデジタル化の形を一緒に考えます。</p>
-          <p>ツールはあくまで手段の一つです。kintoneをはじめ、Webアプリ、スマホアプリ、生成AIなど、現場の運用状況や既存システムに合わせて選択し、検査結果の自動判定、出荷可否の条件分岐、クレーム対応の水平展開管理、在庫ロットの状態追跡など、品質管理に必要な「見える化」を実現します。</p>
-          <p>現場の業務をそのままシステム化するのではなく、JISの視点でフローを整理し、必要な記録と承認の流れをデザインしてからDX化に進むため、監査対応も含めた運用がしやすくなります。</p>
-          <p>加えて、生成AIを活用した要件整理、画面設計、コード生成、テスト観点の抽出まで、スピーディーに進められます。</p>
+          <p>JIS品質管理者として、製造現場や品質管理業務の流れを踏まえた業務改善を行っています。</p>
+          <p>得意としているのは、紙やExcelに分かれている情報を整理し、入力、確認、判定、集計までつながる仕組みに変えることです。検査記録、ロット管理、出荷可否、不適合、是正処置、在庫確認など、現場で起きやすい確認待ちや入力漏れを減らす設計を意識しています。</p>
+          <p>使用するツールは目的に合わせて選びます。kintone、Web画面、JavaScript、CSS、生成AIなどを組み合わせ、現場の運用に合う形で作ります。現在は、DockerやAWSなどのサーバー周りも学習し、対応範囲を広げています。</p>
         </div>
         <div class="profile-meta">
-          <div class="profile-photo-placeholder" aria-label="プロフィール写真の配置場所">
-            <span>写真</span>
+          <div class="side-card" style="padding:var(--space-lg);">
+            <h2 style="font-size:0.9rem;">対応領域</h2>
+            <ul class="side-mini-list">
+              <li><strong>業務改善</strong><span>現場フローの整理とデジタル化</span></li>
+              <li><strong>品質管理</strong><span>検査・ロット・不適合・是正処置</span></li>
+              <li><strong>業務アプリ設計</strong><span>入力しやすい画面と判定・集計</span></li>
+              <li><strong>生成AI活用</strong><span>要件整理、試作、資料作成</span></li>
+              <li><strong>クラウド学習中</strong><span>Docker / AWS での公開準備</span></li>
+            </ul>
           </div>
           <div class="name-card">
             <div class="name-card-name">Mitsuhiro</div>
@@ -1579,13 +1691,16 @@
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">SKILL</div>
-        <h2>業務理解と実装をつなぐスキル</h2>
+        <h2>できること</h2>
       </div>
       <div class="skill-grid">
-        <div class="skill-item"><strong>kintoneアプリ設計</strong><span>業務フロー、入力項目、一覧、権限、通知、承認まで、現場運用に合わせて設計します。</span></div>
+        <div class="skill-item"><strong>業務フロー整理・要件整理</strong><span>現場の紙やExcelの流れを整理し、デジタル化に向けた要件と画面構成を考えます。</span></div>
+        <div class="skill-item"><strong>品質管理・製造業務の理解</strong><span>検査、ロット、出荷可否、不適合、是正処置など、現場の品質管理フローを踏まえて設計します。</span></div>
+        <div class="skill-item"><strong>業務アプリ設計</strong><span>入力、確認、判定、集計がつながる画面構成を考え、無理なく運用できる形に落とし込みます。</span></div>
         <div class="skill-item"><strong>JavaScript / CSSカスタマイズ</strong><span>標準機能だけでは難しい入力補助、判定、集計、画面改善を実装します。</span></div>
-        <div class="skill-item"><strong>品質管理・製造業務理解</strong><span>検査、ロット、出荷可否、不適合、是正処置など、品質管理の流れを踏まえて整理します。</span></div>
         <div class="skill-item"><strong>生成AIを使ったDX支援</strong><span>要件整理、画面モック、Webアプリ試作、資料作成をスピーディーに進めます。</span></div>
+        <div class="skill-item"><strong>kintone・Webアプリ・クラウドツール活用</strong><span>目的に合わせてkintone、Web画面、クラウドツールを組み合わせて活用します。</span></div>
+        <div class="skill-item skill-item-wide"><strong>Docker・AWS学習中</strong><span>DockerやAWSを使った小規模Webアプリ公開にも取り組んでおり、業務改善アプリをクラウド上で動かすための知識を強化しています。</span></div>
       </div>
     </div>
   </section>
@@ -1594,8 +1709,9 @@
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">WORKS</div>
-        <h2>業務改善・DX事例</h2>
+        <h2>制作実績</h2>
       </div>
+      <p class="print-note case-note" style="margin-bottom:var(--space-xl);">実務経験をもとに、守秘義務に配慮して再構成した公開用サンプルです。実在の会社名、顧客名、品番、ロット、検査値は含みません。</p>
       <article id="case01" class="case"></article>
       <article id="case02" class="case"></article>
       <article id="case03" class="case"></article>
@@ -1603,11 +1719,26 @@
     </div>
   </section>
 
+  <section class="skill-section" aria-labelledby="consult-heading">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">CONSULT</div>
+        <h2 id="consult-heading">相談できること</h2>
+      </div>
+      <div class="system-map" aria-label="相談できること">
+        <div class="map-node"><strong>業務整理</strong><span>Excelや紙の情報整理からアプリ化まで</span></div>
+        <div class="map-node"><strong>入力漏れ対策</strong><span>必須入力、入力補助、確認フローの設計</span></div>
+        <div class="map-node"><strong>集計自動化</strong><span>判定、集計、レポートの自動化</span></div>
+        <div class="map-node"><strong>品質管理の見える化</strong><span>検査・ロット・出荷可否の可視化</span></div>
+      </div>
+    </div>
+  </section>
+
   <section id="contact" class="contact-section">
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">CONTACT</div>
-        <h2>まずは気軽に相談してください</h2>
+        <h2>お問い合わせ</h2>
       </div>
       <p>現在の業務運用や、「ちょっと面倒だな」と感じているフローを教えてください。</p>
       <p>ヒアリングから設計、開発、テスト、運用開始まで一緒に進めます。</p>
@@ -1620,8 +1751,8 @@
       <section class="side-card">
         <h2>対応できること</h2>
         <ul class="side-mini-list">
-          <li><strong>kintoneアプリ開発</strong><span>設計、フィールド構成、一覧、権限、運用導線の整理</span></li>
-          <li><strong>JavaScript/CSSカスタマイズ</strong><span>入力補助、判定、集計、画面UI改善</span></li>
+          <li><strong>業務フロー整理</strong><span>現場の流れを整理し、デジタル化の要件を整理</span></li>
+          <li><strong>業務アプリ設計</strong><span>入力、確認、判定、集計がつながる画面設計</span></li>
           <li><strong>品質・製造業務のDX</strong><span>ロット、検査、出荷、是正処置の見える化</span></li>
           <li><strong>生成AI活用</strong><span>業務改善、資料作成、Webアプリ試作</span></li>
         </ul>
@@ -1840,6 +1971,13 @@
       }).join("");
       return `
         ${caseHeader("01", "生産計画・在庫管理・品質判定の連携基盤", "生産〜出荷までをロット単位で追える連携基盤。導入後、出荷判断の確認工数が1日2時間から15分に削減され、出荷ミスは月2件から0件に抑えられました。", ["複数アプリ連携", "ロット追跡", "出荷可否判定"])}
+        <p class="print-note case-note">実務経験をもとに、守秘義務に配慮して再構成した公開用サンプルです。実在の会社名、顧客名、品番、ロット、検査値は含みません。</p>
+        <div class="small-list" style="margin:var(--space-lg) 0;">
+          <div class="small-item">
+            <strong>対応できる依頼例</strong>
+            <span>Excelで管理している生産予定、在庫、検査結果を整理し、出荷可否まで確認できる仕組みに変更します。</span>
+          </div>
+        </div>
         <div class="metric-row">
           ${metric("対象ロット", production.length, "月間対象")}
           ${metric("合格", ok, "最終判定")}
@@ -1898,6 +2036,13 @@
       }).join("");
       return `
         ${caseHeader("02", "多品種品質判定ダッシュボード", "品質指標を組み合わせて、区分ごとの合否を可視化。導入後、要確認品の見落としが30%減少し、判定作業が1ロットあたり2時間から30分に短縮されました。", ["多変量判定", "散布図可視化", "実験品管理"])}
+        <p class="print-note case-note">実務経験をもとに、守秘義務に配慮して再構成した公開用サンプルです。実在の会社名、顧客名、品番、ロット、検査値は含みません。</p>
+        <div class="small-list" style="margin:var(--space-lg) 0;">
+          <div class="small-item">
+            <strong>対応できる依頼例</strong>
+            <span>検査データを集約し、条件に応じた合否判定や要確認品の抽出を行える画面を作ります。</span>
+          </div>
+        </div>
         <div class="metric-row">
           ${metric("試験件数", thermal.length, "月間試験データ")}
           ${metric("判定区分", "3", "製品群I / II / III")}
@@ -1970,11 +2115,18 @@
       `);
       return `
         ${caseHeader("03", "在庫管理・出荷可否・不適合品移動アプリ", "在庫位置・ロット・出荷可否を3D置場風に可視化。導入後、在庫探しの時間が1件あたり15分から1分に短縮され、出荷遅延が月4件から1件に削減されました。", ["マトリクス在庫", "出荷予定照合", "不適合品追跡"])}
+        <p class="print-note case-note">実務経験をもとに、守秘義務に配慮して再構成した公開用サンプルです。実在の会社名、顧客名、品番、ロット、検査値は含みません。</p>
+        <div class="small-list" style="margin:var(--space-lg) 0;">
+          <div class="small-item">
+            <strong>対応できる依頼例</strong>
+            <span>ロット、置場、数量、出荷可否を一覧化し、現場で探す時間や確認待ちを減らします。</span>
+          </div>
+        </div>
         <div class="metric-row">
           ${metric("在庫スロット", warehouse.length, "管理対象")}
           ${metric("出荷可", warehouse.filter((r) => r.judgment === "出荷可").length, "候補")}
           ${metric("保留/不可", warehouse.filter((r) => r.judgment !== "出荷可").length, "確認対象")}
-          ${metric("追跡単位", "在庫位置 + ロット", "現場運用")}
+          ${metric("追跡単位", "在庫位置 + ロット / 現場運用", "")}
         </div>
         <div class="effect-row">
           ${effectCard("15分/件", "1分/件", "在庫探し時間")}
@@ -2374,7 +2526,14 @@
         ${i < 5 ? '<span class="flow-arrow">→</span>' : ''}
       `).join("");
       return `
-        ${caseHeader("04", "クレーム管理・是正処置ウィザード", "受付〜完了までを6ステップで進める入力ウィザード。導入後、是正処置の期限遅れが60%減少し、水平展開の漏れが防止され、監査時の記録集約工数が8時間から30分に短縮されました。", ["6ステップウィザード", "4M分析", "水平展開"])}
+        ${caseHeader("04", "顧客フィードバック・是正処置管理フロー", "受付〜完了までを6ステップで進める入力ウィザード。導入後、是正処置の期限遅れが60%減少し、水平展開の漏れが防止され、監査時の記録集約工数が8時間から30分に短縮されました。", ["6ステップウィザード", "4M分析", "水平展開"])}
+        <p class="print-note case-note">実務経験をもとに、守秘義務に配慮して再構成した公開用サンプルです。実在の会社名、顧客名、品番、ロット、検査値は含みません。</p>
+        <div class="small-list" style="margin:var(--space-lg) 0;">
+          <div class="small-item">
+            <strong>対応できる依頼例</strong>
+            <span>受付、原因分析、是正処置、水平展開、完了確認までを一つの流れで管理できるようにします。</span>
+          </div>
+        </div>
         <div class="metric-row">
           ${metric("クレーム件数", claims.length, "月間対象")}
           ${metric("対応中", claims.filter((r) => r.status === "対応中").length, "是正中")}
